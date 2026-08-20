@@ -6,8 +6,8 @@
 }
 
 :root {
-  --color-primary: #191d2b;
-  --color-secondary: #27AE60;
+  --color-primary: #2b2b2b;
+  --color-secondary: #2783ae;
   --color-white: #FFFFFF;
   --color-black: #000;
   --color-grey0: #f8f8f8;
@@ -23,7 +23,7 @@
 
 .light-mode {
   --color-primary: #FFFFFF;
-  --color-secondary: #F56692;
+  --color-secondary:#151515;
   --color-white: #454e56;
   --color-black: #000;
   --color-grey0: #f8f8f8;
@@ -33,14 +33,16 @@
   --color-grey-4: #454e56;
   --color-grey-5: #f8f8f8;
   --color-grey-6: #12181b;
+  --color-hithere: #959b9e;
+
 }
 
 body {
   background-color: var(--color-primary);
   font-family: "Poppins", sans-serif;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--color-white);
-  transition: all 0.4s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 a {
@@ -104,7 +106,7 @@ section {
   background-color: var(--color-grey-4);
   width: 55px;
   height: 55px;
-  border-radius: 50%;
+  border-radius: 40%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -129,7 +131,7 @@ section {
   right: 3%;
   width: 70px;
   height: 70px;
-  border-radius: 50%;
+  border-radius: 20%;
   background-color: var(--color-grey-4);
   cursor: pointer;
   position: fixed;
@@ -153,6 +155,7 @@ section {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   min-height: 100vh;
+
 }
 .header-content .left-header {
   display: flex;
@@ -178,27 +181,21 @@ section {
   background-color: var(--color-black);
   transition: all 0.4s ease-in-out;
 }
-.header-content .left-header .image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: all 0.4s ease-in-out;
-  filter: grayscale(100%);
-}
-.header-content .left-header .image img:hover {
-  filter: grayscale(0);
-}
+
 .header-content .right-header {
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-right: 18rem;
+  background-color: var(--color-secondary) ;
+  
+
 }
 .header-content .right-header .name {
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 .header-content .right-header .name span {
-  color: var(--color-secondary);
+  color: var(--color-primary);
 }
 .header-content .right-header p {
   margin: 1.5rem 0;
@@ -214,14 +211,16 @@ section {
 }
 .about-container .right-about {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 2rem;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 1rem;
+  
 }
 .about-container .right-about .about-item {
   border: 1px solid var(--color-grey-5);
   border-radius: 5px;
   transition: all 0.4s ease-in-out;
   box-shadow: 1px 2px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 .about-container .right-about .about-item:hover {
   cursor: default;
@@ -235,15 +234,15 @@ section {
   flex-direction: column;
 }
 .about-container .right-about .about-item .abt-text .large-text {
-  font-size: 3rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--color-secondary);
 }
 .about-container .right-about .about-item .abt-text .small-text {
-  padding-left: 3rem;
+  padding-left: 10px;
   position: relative;
   text-transform: uppercase;
-  font-size: 1.2rem;
+  font-size: 0.7rem;
   color: var(--color-grey-1);
   letter-spacing: 2px;
 }
@@ -271,6 +270,7 @@ section {
 
 .about-stats {
   padding-bottom: 4rem;
+  display: none;
 }
 .about-stats .progress-bars {
   display: grid;
@@ -333,6 +333,7 @@ section {
   text-align: center;
   padding: 3.5rem 0;
   position: relative;
+  display: none;
 }
 .stat-title::before {
   content: "";
@@ -347,7 +348,7 @@ section {
 
 /*Timeline*/
 .timeline {
-  display: grid;
+  display: none;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 2rem;
   padding-bottom: 3rem;
@@ -472,18 +473,16 @@ section {
   transform: scale(1);
 }
 
-.blogs {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 2rem;
-  margin-top: 3rem;
+.blogspot {
+  display: block;
+  margin: 10vh;
+  background-color: var(--color-secondary);
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px 10px 10px 10px;
 }
-.blogs .blog {
-  position: relative;
-  background-color: var(--color-grey-5);
-  border-radius: 5px;
-  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.1);
-  transition: all 0.4s ease-in-out;
+.blogspot .h3 {
+  color: var(--color-primary)
 }
 .blogs .blog:hover {
   box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.3);
@@ -625,7 +624,7 @@ section {
 }
 
 .main-btn {
-  border-radius: 30px;
+  border-radius: 60px;
   color: inherit;
   font-weight: 600;
   position: relative;
@@ -634,16 +633,19 @@ section {
   align-self: flex-start;
   align-items: center;
   overflow: hidden;
+  width: max-content;
 }
 .main-btn .btn-text {
   padding: 0 2rem;
+  font-size: small;
+
 }
 .main-btn .btn-icon {
   background-color: var(--color-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
+  border-radius: 47%;
   padding: 1rem;
 }
 .main-btn::before {
@@ -718,6 +720,8 @@ section {
     padding-right: 0rem !important;
     width: 90%;
     margin: 0 auto;
+    text-align: center;
+    padding: 0px; 
   }
   .right-header .name {
     font-size: 2.5rem !important;
@@ -784,6 +788,7 @@ section {
 
   .contact-content-con {
     flex-direction: column;
+    text-align: center;
   }
   .contact-content-con .right-contact {
     margin-left: 0;
@@ -933,6 +938,17 @@ section {
     padding-top: 3rem;
   }
 }
+@media screen and (min-width: 800px) {
+  .header-content .right-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 18rem;
+  background-color: var(--color-secondary) ;
+  text-align: left;
+  padding-left: 25px;
+  }
+}
 @media screen and (max-width: 700px) {
   .container {
     padding: 7rem 3rem;
@@ -960,5 +976,3 @@ section {
     font-size: 4rem;
   }
 }
-
-/*# sourceMappingURL=styles.css.map */
