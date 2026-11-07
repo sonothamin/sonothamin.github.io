@@ -1,45 +1,161 @@
-(function () {
-  "use strict";
+(() => {
+  const FULL_NAME = "Sonoth Amin";
+  const grid = document.querySelector(".design-grid");
+  const siteCursor = document.querySelector("[data-site-cursor]");
+  const name = document.querySelector("[data-hero-name]");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const coarse = window.matchMedia("(hover: none), (pointer: coarse)").matches;
 
-  function initNavigation() {
-    var controls = document.querySelectorAll(".control");
-    if (!controls.length) return;
+  /* ---------- Cursor sizing (unchanged behaviour) ---------- */
+  const getCursorMetrics = () => {
+    const dpr = window.devicePixelRatio || 1;
+    const density = (96 * dpr) / 160;
 
-    controls.forEach(function (button) {
-      button.addEventListener("click", function () {
-        var targetId = button.dataset.id;
-        var target = targetId ? document.getElementById(targetId) : null;
-        if (!target) return;
+    let scale = 1;
+    if (density >= 3.5) scale = 4;
+    else if (density >= 2.5) scale = 3;
+    else if (density >= 1.75) scale = 2;
+    else if (density >= 1.25) scale = 1.5;
 
-        var activeBtn = document.querySelector(".controls .active-btn");
-        var activeSection = document.querySelector("main .active, header.active");
+    const shortCss = Math.min(window.innerWidth, window.innerHeight);
+    const baseMdpi = Math.round(Math.max(48, Math.min(64, shortCss * 0.045)));
+    const sizeCss = Math.round(baseMdpi * scale);
 
-        if (activeBtn) activeBtn.classList.remove("active-btn");
-        button.classList.add("active-btn");
+    return {
+      sizeCss,
+      hotspotX: Math.round(sizeCss * (10.5 / 24)),
+      hotspotY: Math.round(sizeCss * (9 / 24)),
+    };
+  };
 
-        if (activeSection) activeSection.classList.remove("active");
-        target.classList.add("active");
-      });
+  let metrics = getCursorMetrics();
+
+  const applyCursorSize = (m) => {
+    const root = document.documentElement;
+    root.style.setProperty("--cursor-size", `${m.sizeCss}px`);
+    root.style.setProperty("--cursor-hot-x", `${m.hotspotX}px`);
+    root.style.setProperty("--cursor-hot-y", `${m.hotspotY}px`);
+    root.style.setProperty("--cursor", `url("cursor.svg") ${m.hotspotX} ${m.hotspotY}, auto`);
+
+    if (!siteCursor) return;
+    // Hand pointer: ~0.58x the arrow box, fingertip (41.5% / 9%) lands on the hotspot.
+    const hand = Math.round(m.sizeCss * 0.58);
+    const hx = hand * 0.415;
+    const hy = hand * 0.09;
+    siteCursor.style.setProperty("--hand-size", `${hand}px`);
+    siteCursor.style.setProperty("--hand-hx", `${hx}px`);
+    siteCursor.style.setProperty("--hand-hy", `${hy}px`);
+    siteCursor.style.setProperty("--hand-left", `${m.hotspotX - hx}px`);
+    siteCursor.style.setProperty("--hand-top", `${m.hotspotY - hy}px`);
+  };
+
+  applyCursorSize(metrics);
+  window.addEventListener(
+    "resize",
+    () => {
+      metrics = getCursorMetrics();
+      applyCursorSize(metrics);
+    },
+    { passive: true }
+  );
+
+  /* ---------- Site cursor + grid glow ---------- */
+  // Independent of the intro: it simply takes over on the first mouse move.
+  const initSiteCursor = () => {
+    if (!siteCursor || coarse) return;
+
+    const move = (x, y) => {
+      siteCursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      siteCursor.classList.add("is-on");
+      if (grid) {
+        grid.style.setProperty("--mx", `${x}px`);
+        grid.style.setProperty("--my", `${y}px`);
+        grid.classList.add("has-glow");
+      }
+    };
+
+    window.addEventListener(
+      "pointermove",
+      (e) => {
+        if (!document.body.classList.contains("cursor-ready")) {
+          document.body.classList.add("cursor-ready");
+        }
+        move(e.clientX, e.clientY);
+      },
+      { passive: true }
+    );
+
+    document.documentElement.addEventListener("mouseleave", () => {
+      siteCursor.classList.remove("is-on");
+      grid?.classList.remove("has-glow");
     });
-  }
-
-  function initThemeToggle() {
-    var themeBtn = document.querySelector(".theme-btn");
-    if (!themeBtn) return;
-
-    themeBtn.addEventListener("click", function () {
-      document.body.classList.toggle("light-mode");
+    document.addEventListener("pointerover", (e) => {
+      siteCursor.classList.toggle(
+        "is-link",
+        !!e.target.closest("a, button, [role='button'], summary, label[for]")
+      );
     });
-  }
+    window.addEventListener("pointerdown", () => siteCursor.classList.add("is-press"));
+    window.addEventListener("pointerup", () => siteCursor.classList.remove("is-press"));
+  };
 
-  function init() {
-    initNavigation();
-    initThemeToggle();
-  }
+  /* ---------- Intro ---------- */
+  // Split the name into masked glyphs so each can rise on its own.
+  const buildName = () => {
+    if (!name) return;
+    const frag = document.createDocumentFragment();
+    let i = 0;
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
-  } else {
-    init();
-  }
+    for (const char of FULL_NAME) {
+      if (char === " ") {
+        const gap = document.createElement("span");
+        gap.className = "gap";
+        gap.setAttribute("aria-hidden", "true");
+        frag.append(gap);
+        continue;
+      }
+      const mask = document.createElement("span");
+      mask.className = "mask";
+      mask.setAttribute("aria-hidden", "true");
+      const ch = document.createElement("span");
+      ch.className = "ch";
+      ch.textContent = char;
+      ch.style.setProperty("--i", String(i++));
+      mask.append(ch);
+      frag.append(mask);
+    }
+
+    name.setAttribute("aria-label", FULL_NAME);
+    name.textContent = "";
+    name.append(frag);
+    name.classList.add("is-built");
+  };
+
+  const play = () => {
+    // Two frames so the starting state is painted before transitions begin.
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => {
+        grid?.classList.add("is-visible");
+        document.body.classList.add("is-in");
+      })
+    );
+  };
+
+  const run = () => {
+    buildName();
+    if (reduceMotion) {
+      grid?.classList.add("is-visible");
+      document.body.classList.add("is-in");
+      return;
+    }
+    play();
+  };
+
+  initSiteCursor();
+
+  // Wait for Rajdhani so glyphs never reflow mid-animation (capped at 1.2s).
+  const fontsReady = document.fonts?.ready ?? Promise.resolve();
+  Promise.race([fontsReady, new Promise((r) => window.setTimeout(r, 1200))])
+    .catch(() => {})
+    .then(run);
 })();
