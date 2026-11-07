@@ -11,7 +11,7 @@
   --fg: #ffffff;
   --muted: #8a8a8a;
   --muted-strong: #b4b4b4;
-  --grid-line: rgba(255, 255, 255, 0.03);
+  --grid-line: rgba(255, 255, 255, 0.070);
   --font-ui: "Rajdhani", sans-serif;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --cursor-size: 48px;
@@ -211,6 +211,11 @@ a:focus-visible {
   justify-content: center;
   padding: 2rem 1.5rem 4rem;
   text-align: center;
+
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* IE 10 and 11 / Edge Legacy */
+  user-select: none;         /* Standard syntax (Chrome, Edge, Opera) */
 }
 
 .name-stage {
@@ -277,6 +282,11 @@ a:focus-visible {
   font-weight: 500;
   letter-spacing: 0.03em;
   color: var(--muted);
+
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* IE 10 and 11 / Edge Legacy */
+  user-select: none;         /* Standard syntax (Chrome, Edge, Opera) */
 }
 
 .js .subtitle {
