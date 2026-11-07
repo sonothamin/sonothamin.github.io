@@ -1,0 +1,214 @@
+/* Contact page. Builds on the tokens and components in style.css. */
+
+:root {
+  --divider: rgba(255, 255, 255, 0.14);
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 10001;
+  padding: 0.5rem 0.9rem;
+  background: var(--fg);
+  color: var(--bg);
+  font-weight: 600;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+  outline: 2px solid var(--bg);
+  outline-offset: -4px;
+}
+
+.contact {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  width: min(100% - 3rem, 64rem);
+  margin-inline: auto;
+  padding: clamp(2rem, 6vw, 4rem) 0 clamp(3rem, 8vw, 5rem);
+}
+
+/* —— Title —— */
+.page-title {
+  font-family: var(--font-title);
+  font-size: clamp(2.25rem, 9vw, 4.5rem);
+  font-weight: 400;
+  font-synthesis: none;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.title-mask {
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.1em 0.02em;
+  margin: -0.1em -0.02em;
+  vertical-align: top;
+}
+
+.title-line { display: inline-block; }
+
+.c-head .hero-rule {
+  margin-top: 1rem;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.4), transparent 85%);
+  transform-origin: left center;
+}
+
+/* —— Channel rows —— */
+.rows {
+  list-style: none;
+  margin-top: clamp(2rem, 6vw, 3.5rem);
+}
+
+.row {
+  display: flex;
+  align-items: stretch;
+  border-top: 1px solid var(--divider);
+}
+
+.row:last-child { border-bottom: 1px solid var(--divider); }
+
+.row-link {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1.6rem 8rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  padding: clamp(1.1rem, 3vw, 1.7rem) 0;
+  transition: padding 0.4s var(--ease);
+}
+
+.ch-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--muted);
+}
+
+.ch-value {
+  overflow-wrap: anywhere;
+  font-size: clamp(1.3rem, 3.6vw, 2rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--muted-strong);
+  transition: color 0.25s ease;
+}
+
+.row-link .go {
+  width: 1.4rem;
+  height: 1.4rem;
+  color: var(--muted);
+  transition: transform 0.4s var(--ease), color 0.25s ease;
+}
+
+a.row-link:hover { padding-left: 0.75rem; }
+a.row-link:hover .ch-value,
+.row:hover .ch-value { color: var(--fg); }
+a.row-link:hover .go { color: var(--fg); transform: translate(3px, -3px); }
+
+/* Email row: arrow is redundant next to the copy button */
+.row:has(.copy-btn) .row-link .go { display: none; }
+
+/* Brand icons live in /assets/icons and are tinted via mask so they follow text colour */
+.ico {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: var(--muted);
+  -webkit-mask: var(--src) center / contain no-repeat;
+  mask: var(--src) center / contain no-repeat;
+  transition: background-color 0.25s ease;
+}
+.ico-mail { --src: url("/assets/icons/mail.svg"); }
+.ico-whatsapp { --src: url("/assets/icons/whatsapp.svg"); }
+.ico-linkedin { --src: url("/assets/icons/linkedin.svg"); }
+.ico-github { --src: url("/assets/icons/github.svg"); }
+.ico-facebook { --src: url("/assets/icons/facebook.svg"); }
+.row:hover .ico { background-color: var(--fg); }
+
+.copy-btn {
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  padding: 0 0.25rem 0 0.75rem;
+  background: none;
+  border: 0;
+  border-radius: 2px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+
+.copy-btn svg { width: 1.05rem; height: 1.05rem; }
+.copy-btn:hover, .copy-btn.is-done { color: var(--fg); }
+
+.row-link:focus-visible,
+.copy-btn:focus-visible {
+  outline: 1px solid var(--fg);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* —— Load sequence, in step with home and about —— */
+.js .title-line { transform: translateY(110%); }
+
+.is-in .title-line {
+  transform: none;
+  transition: transform 1100ms var(--ease) 280ms;
+}
+
+.js .row {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.is-in .row {
+  opacity: 1;
+  transform: none;
+  transition: opacity 800ms ease calc(900ms + var(--n, 0) * 90ms),
+    transform 800ms var(--ease) calc(900ms + var(--n, 0) * 90ms);
+}
+
+.row:nth-child(2) { --n: 1; }
+.row:nth-child(3) { --n: 2; }
+.row:nth-child(4) { --n: 3; }
+.row:nth-child(5) { --n: 4; }
+
+@media (max-width: 640px) {
+  .row-link {
+    grid-template-columns: 1.5rem minmax(0, 1fr) auto;
+    gap: 0.15rem 0.9rem;
+  }
+  .ico { grid-column: 1; grid-row: 1 / span 2; align-self: center; }
+  .ch-label, .ch-value { grid-column: 2; }
+  .row-link .go { grid-column: 3; grid-row: 1 / span 2; }
+  .ch-value { font-size: clamp(1.05rem, 4.8vw, 1.35rem); }
+  .copy-btn [data-copy-label] { display: none; }
+  .copy-btn { padding: 0 0.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .title-line,
+  .js .row {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+
+.lede {
+  margin: 2rem 0 3rem;
+  font-size: clamp(1.2rem, 2.3vw, 1.45rem);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--fg);
+}

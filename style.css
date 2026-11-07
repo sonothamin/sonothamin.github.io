@@ -18,7 +18,7 @@
   --cursor-size: 48px;
   --cursor-hot-x: 21px;
   --cursor-hot-y: 18px;
-  --cursor: url("cursor.svg") 21 18, auto;
+  --cursor: url("/assets/cursors/cursor.svg") 21 18, auto;
 }
 
 html {
