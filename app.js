@@ -35,7 +35,7 @@
     root.style.setProperty("--cursor-size", `${m.sizeCss}px`);
     root.style.setProperty("--cursor-hot-x", `${m.hotspotX}px`);
     root.style.setProperty("--cursor-hot-y", `${m.hotspotY}px`);
-    root.style.setProperty("--cursor", `url("cursor.svg") ${m.hotspotX} ${m.hotspotY}, auto`);
+    root.style.setProperty("--cursor", `url("/cursor.svg") ${m.hotspotX} ${m.hotspotY}, auto`);
 
     if (!siteCursor) return;
     // Hand pointer: ~0.58x the arrow box, fingertip (41.5% / 9%) lands on the hotspot.

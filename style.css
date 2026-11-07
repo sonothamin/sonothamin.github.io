@@ -12,7 +12,8 @@
   --muted: #8a8a8a;
   --muted-strong: #b4b4b4;
   --grid-line: rgba(255, 255, 255, 0.070);
-  --font-ui: "Rajdhani", sans-serif;
+  --font-ui: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-title: "Kola", "Geist", system-ui, sans-serif;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --cursor-size: 48px;
   --cursor-hot-x: 21px;
@@ -229,8 +230,10 @@ a:focus-visible {
   display: inline-flex;
   justify-content: center;
   max-width: 100%;
+  font-family: var(--font-title);
   font-size: clamp(3rem, 14vw, 8rem);
-  font-weight: 500;
+  font-weight: 400;
+  font-synthesis: none;
   letter-spacing: -0.01em;
   line-height: 1;
   white-space: nowrap;
