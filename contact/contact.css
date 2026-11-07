@@ -57,10 +57,19 @@
   transform-origin: left center;
 }
 
+.lede {
+  max-width: 38rem;
+  margin-top: 2rem;
+  font-size: clamp(1.2rem, 2.3vw, 1.45rem);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--fg);
+}
+
 /* —— Channel rows —— */
 .rows {
   list-style: none;
-  margin-top: clamp(2rem, 6vw, 3.5rem);
+  margin-top: clamp(1.75rem, 5vw, 2.75rem);
 }
 
 .row {
@@ -109,10 +118,11 @@
 a.row-link:hover { padding-left: 0.75rem; }
 a.row-link:hover .ch-value,
 .row:hover .ch-value { color: var(--fg); }
-a.row-link:hover .go { color: var(--fg); transform: translate(3px, -3px); }
-
 /* Email row: arrow is redundant next to the copy button */
 .row:has(.copy-btn) .row-link .go { display: none; }
+
+a.row-link:hover .go { color: var(--fg); transform: translate(3px, -3px); }
+
 
 /* Brand icons live in /assets/icons and are tinted via mask so they follow text colour */
 .ico {
@@ -165,11 +175,15 @@ a.row-link:hover .go { color: var(--fg); transform: translate(3px, -3px); }
   transition: transform 1100ms var(--ease) 280ms;
 }
 
+.js .lede,
 .js .row {
   opacity: 0;
   transform: translateY(10px);
 }
 
+.is-in .lede { --n: -1; }
+
+.is-in .lede,
 .is-in .row {
   opacity: 1;
   transform: none;
@@ -197,18 +211,10 @@ a.row-link:hover .go { color: var(--fg); transform: translate(3px, -3px); }
 
 @media (prefers-reduced-motion: reduce) {
   .js .title-line,
+  .js .lede,
   .js .row {
     opacity: 1;
     transform: none;
     transition: none;
   }
-}
-
-
-.lede {
-  margin: 2rem 0 3rem;
-  font-size: clamp(1.2rem, 2.3vw, 1.45rem);
-  font-weight: 500;
-  line-height: 1.5;
-  color: var(--fg);
 }
