@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio | Sonoth Amin</title>
+  <meta name="description" content="A collection of my work.">
+  <meta name="theme-color" content="#000000">
+  <link rel="canonical" href="https://sonothamin.dev/portfolio/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Portfolio | Sonoth Amin">
+  <meta property="og:description" content="A collection of my work.">
+  <meta property="og:url" content="https://sonothamin.dev/portfolio/">
+
+  <script>document.documentElement.classList.add("js")</script>
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=kola@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/portfolio/portfolio.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="design-grid" aria-hidden="true"></div>
+
+  <div class="site-cursor" data-site-cursor aria-hidden="true">
+    <img src="/assets/cursors/cursor.svg" alt="" width="24" height="24" draggable="false">
+    <img class="cursor-hand" src="/assets/cursors/cursor-pointer.svg" alt="" draggable="false">
+  </div>
+
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Primary">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/portfolio/" class="nav-link is-active" aria-current="page">Portfolio</a>
+      <a href="/#/Blog" class="nav-link">Blog</a>
+      <a href="/contact/" class="nav-link">Contact</a>
+      <a href="/about/" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <main id="main" class="portfolio">
+    <div class="p-head">
+      <h1 class="page-title"><span class="title-mask"><span class="title-line">Portfolio</span></span></h1>
+      <span class="hero-rule" aria-hidden="true"></span>
+      <p class="lede">A short line about the work you do.</p>
+    </div>
+
+    <div class="p-body">
+      <div class="cats" role="tablist" aria-label="Project categories" aria-orientation="vertical">
+        <button class="cat" role="tab" id="tab-infrastructure" data-cat="infrastructure"
+          aria-controls="panel-infrastructure" aria-selected="true" tabindex="0"><span>Infrastructure &
+            Systems</span><span class="cat-n">1</span></button>
+        <button class="cat" role="tab" id="tab-software" data-cat="software" aria-controls="panel-software"
+          aria-selected="false" tabindex="-1"><span>Software & Tooling</span><span class="cat-n">1</span></button>
+        <button class="cat" role="tab" id="tab-electronics" data-cat="electronics" aria-controls="panel-electronics"
+          aria-selected="false" tabindex="-1"><span>Electronics & Embedded</span><span class="cat-n">1</span></button>
+        <button class="cat" role="tab" id="tab-achievements" data-cat="achievements" aria-controls="panel-achievements"
+          aria-selected="false" tabindex="-1"><span>Competitions & Achievements</span><span
+            class="cat-n">1</span></button>
+      </div>
+
+      <div class="panels">
+
+        <!-- INFRA -->
+        <section class="panel" role="tabpanel" id="panel-infrastructure" aria-labelledby="tab-infrastructure">
+          <article class="item">
+            <h2 class="item-title">
+              <button class="item-head" type="button" aria-expanded="false" aria-controls="b-1-1">
+                <span class="item-name">Home Lab</span>
+                <span class="item-desc">One-line description of the project.</span>
+                <svg class="plus" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                  <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+              </button>
+            </h2>
+            <div class="body" id="b-1-1">
+              <div class="inner">
+                <p class="facts">Placeholder details:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                <a class="text-link icon-link" href="https://github.com/sonothamin" target="_blank" rel="noopener">View
+                  project<svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                    <path d="M7 17 17 7m0 0H8m9 0v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg></a>
+              </div>
+            </div>
+          </article>
+
+        </section>
+
+        <!-- SOFT & TOOLS -->
+        <section class="panel" role="tabpanel" id="panel-software" aria-labelledby="tab-software">
+          <article class="item">
+            <h2 class="item-title">
+              <button class="item-head" type="button" aria-expanded="false" aria-controls="b-2-1">
+                <span class="item-name">Scrabble.c</span>
+                <span class="item-desc">A C implementation of the classic word game.</span>
+                <svg class="plus" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                  <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+              </button>
+            </h2>
+            <div class="body" id="b-2-1">
+              <div class="inner">
+                <p class="facts">Placeholder details:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+              </div>
+            </div>
+          </article>
+
+        </section>
+
+        <!-- Category Three -->
+        <section class="panel" role="tabpanel" id="panel-electronics" aria-labelledby="tab-electronics">
+          <article class="item">
+            <h2 class="item-title">
+              <button class="item-head" type="button" aria-expanded="false" aria-controls="b-3-1">
+                <span class="item-name">Project Name</span>
+                <span class="item-desc">One-line description of the project.</span>
+                <svg class="plus" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                  <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+              </button>
+            </h2>
+            <div class="body" id="b-3-1">
+              <div class="inner">
+                <p class="facts">Placeholder details:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+              </div>
+            </div>
+          </article>
+
+        </section>
+
+        <!-- Category Four: plain results, nothing to open -->
+        <section class="panel" role="tabpanel" id="panel-achievements" aria-labelledby="tab-achievements">
+          <article class="item item-static">
+            <h2 class="item-name">Event Name</h2>
+            <p class="item-desc">Short description</p>
+            <p class="result is-top">Result</p>
+          </article>
+        </section>
+
+        <p class="more">
+          <a class="text-link icon-link" href="https://github.com/sonothamin" target="_blank" rel="noopener">All
+            repositories on GitHub<svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+              <path d="M7 17 17 7m0 0H8m9 0v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg></a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p class="footer-copy">&copy; 2026 Sonoth Amin</p>
+  </footer>
+
+  <script src="/app.js" defer></script>
+  <script src="/portfolio/portfolio.js" defer></script>
+</body>
+
+</html>
