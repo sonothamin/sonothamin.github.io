@@ -60,22 +60,23 @@
       <div class="cats" role="tablist" aria-label="Project categories" aria-orientation="vertical">
         <button class="cat" role="tab" id="tab-infrastructure" data-cat="infrastructure"
           aria-controls="panel-infrastructure" aria-selected="true" tabindex="0"><span>Infrastructure &
-            Systems</span><span class="cat-n">1</span></button>
+            Systems</span><span class="cat-n" aria-hidden="true">1</span></button>
         <button class="cat" role="tab" id="tab-software" data-cat="software" aria-controls="panel-software"
-          aria-selected="false" tabindex="-1"><span>Software & Tooling</span><span class="cat-n">1</span></button>
+          aria-selected="false" tabindex="-1"><span>Software & Tooling</span><span class="cat-n" aria-hidden="true">1</span></button>
         <button class="cat" role="tab" id="tab-electronics" data-cat="electronics" aria-controls="panel-electronics"
-          aria-selected="false" tabindex="-1"><span>Electronics & Embedded</span><span class="cat-n">1</span></button>
+          aria-selected="false" tabindex="-1"><span>Electronics & Embedded</span><span class="cat-n" aria-hidden="true">1</span></button>
         <button class="cat" role="tab" id="tab-achievements" data-cat="achievements" aria-controls="panel-achievements"
           aria-selected="false" tabindex="-1"><span>Competitions & Achievements</span><span
-            class="cat-n">1</span></button>
+            class="cat-n" aria-hidden="true">1</span></button>
       </div>
 
       <div class="panels">
 
         <!-- INFRA -->
         <section class="panel" role="tabpanel" id="panel-infrastructure" aria-labelledby="tab-infrastructure">
+          <h2 class="panel-title" id="title-infrastructure">Infrastructure &amp; Systems</h2>
           <article class="item">
-            <h2 class="item-title">
+            <h3 class="item-title">
               <button class="item-head" type="button" aria-expanded="false" aria-controls="b-1-1">
                 <span class="item-name">Home Lab</span>
                 <span class="item-desc">One-line description of the project.</span>
@@ -83,7 +84,7 @@
                   <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                 </svg>
               </button>
-            </h2>
+            </h3>
             <div class="body" id="b-1-1">
               <div class="inner">
                 <p class="facts">Placeholder details:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -103,8 +104,9 @@
 
         <!-- SOFT & TOOLS -->
         <section class="panel" role="tabpanel" id="panel-software" aria-labelledby="tab-software">
+          <h2 class="panel-title" id="title-software">Software &amp; Tooling</h2>
           <article class="item">
-            <h2 class="item-title">
+            <h3 class="item-title">
               <button class="item-head" type="button" aria-expanded="false" aria-controls="b-2-1">
                 <span class="item-name">Scrabble.c</span>
                 <span class="item-desc">A C implementation of the classic word game.</span>
@@ -112,7 +114,7 @@
                   <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                 </svg>
               </button>
-            </h2>
+            </h3>
             <div class="body" id="b-2-1">
               <div class="inner">
                 <p class="facts">Placeholder details:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -127,8 +129,9 @@
 
         <!-- Category Three -->
         <section class="panel" role="tabpanel" id="panel-electronics" aria-labelledby="tab-electronics">
+          <h2 class="panel-title" id="title-electronics">Electronics &amp; Embedded</h2>
           <article class="item">
-            <h2 class="item-title">
+            <h3 class="item-title">
               <button class="item-head" type="button" aria-expanded="false" aria-controls="b-3-1">
                 <span class="item-name">Project Name</span>
                 <span class="item-desc">One-line description of the project.</span>
@@ -136,7 +139,7 @@
                   <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                 </svg>
               </button>
-            </h2>
+            </h3>
             <div class="body" id="b-3-1">
               <div class="inner">
                 <p class="facts">Placeholder details:Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -151,8 +154,9 @@
 
         <!-- Category Four: plain results, nothing to open -->
         <section class="panel" role="tabpanel" id="panel-achievements" aria-labelledby="tab-achievements">
+          <h2 class="panel-title" id="title-achievements">Competitions &amp; Achievements</h2>
           <article class="item item-static">
-            <h2 class="item-name">Event Name</h2>
+            <h3 class="item-name">Event Name</h3>
             <p class="item-desc">Short description</p>
             <p class="result is-top">Result</p>
           </article>

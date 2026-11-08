@@ -68,8 +68,8 @@
 
 .p-body {
   display: grid;
-  grid-template-columns: 17rem minmax(0, 1fr);
-  gap: 2rem 4rem;
+  grid-template-columns: 24rem minmax(0, 1fr);
+  gap: 2rem 3rem;
   margin-top: clamp(2rem, 6vw, 3.5rem);
 }
 
@@ -80,58 +80,75 @@
   align-self: start;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 0.35rem;
+  gap: 0.1rem;
 }
 
 .cat {
-  display: flex;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 2ch;
   align-items: baseline;
-  padding: 0.3rem 0;
+  column-gap: 1.25rem;
+  padding: 0.6rem 0 0.6rem 2.4rem;
   background: none;
   border: 0;
-  font-family: "Geist Mono", monospace;
-  font-optical-sizing: auto;;
-  font-size: clamp(1.7rem, 2.8vw, 2.1rem);
-  font-weight: 200;
-  line-height: 1.15;
+  font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: clamp(1rem, 1.4vw, 1.1rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
   text-align: left;
+  color: var(--muted-strong);
+  transition: color 0.25s ease;
+}
+
+/* The dash lives in the left gutter, so the text never shifts */
+.cat::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(0.6rem + 0.65em);
+  width: 0;
+  height: 1px;
+  background: var(--fg);
+  transition: width 0.45s var(--ease);
+}
+
+.cat:hover { color: var(--fg); }
+.cat:hover::before { width: 0.9rem; }
+
+.cat[aria-selected="true"] { color: var(--fg); }
+.cat[aria-selected="true"]::before { width: 1.6rem; }
+
+.cat-n {
+  justify-self: end;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
   color: var(--muted);
   transition: color 0.25s ease;
 }
 
-.cat::before {
-  content: "";
-  align-self: center;
-  width: 0;
-  height: 1px;
-  margin-right: 0;
-  background: var(--fg);
-  transition: width 0.45s var(--ease), margin-right 0.45s var(--ease);
-}
-
-.cat:hover { color: var(--muted-strong); }
-
-.cat[aria-selected="true"] { color: var(--fg); }
-
-.cat[aria-selected="true"]::before {
-  width: 1.4rem;
-  margin-right: 0.7rem;
-}
-
-.cat-n {
-  margin-left: 0.6rem;
-  font-family: var(--font-ui);
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--muted);
-}
+.cat:hover .cat-n,
+.cat[aria-selected="true"] .cat-n { color: var(--muted-strong); }
 
 .cat:focus-visible,
 .item-head:focus-visible {
   outline: 1px solid var(--fg);
   outline-offset: 4px;
   border-radius: 2px;
+}
+
+.cat:focus-visible { outline-offset: -2px; }
+
+/* Section titles: read by screen readers on wide screens, shown on narrow ones */
+.panel-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 /* —— Panels —— */
@@ -318,21 +335,48 @@
     gap: 1.5rem;
   }
 
-  .cats {
+  /* No tabs on narrow screens: every category is a titled section */
+  .cats { display: none; }
+
+  .panel:not([hidden]) { animation: none; }
+
+  .panel-title {
     position: static;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0.25rem 1.4rem;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    margin: 2.75rem 0 1rem;
+    font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    font-size: 1.05rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    color: var(--fg);
   }
 
-  .cat::before { display: none; }
+  .panel:first-of-type .panel-title { margin-top: 0; }
 
-  .cat { font-size: clamp(1.4rem, 5.5vw, 1.75rem); }
+  .panel-title::before {
+    content: "";
+    flex: none;
+    align-self: center;
+    width: 1.4rem;
+    height: 1px;
+    background: var(--fg);
+  }
 
-  .cat[aria-selected="true"] > span:first-child {
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.3em;
+  .panel-title::after {
+    content: attr(data-count);
+    margin-left: auto;
+    font-size: 0.75rem;
+    letter-spacing: 0;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
   }
 }
 
@@ -350,6 +394,7 @@
   .js .body,
   .js .inner,
   .plus,
+  .cat,
   .cat::before {
     transition: none;
   }
