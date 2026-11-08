@@ -319,6 +319,13 @@ a:focus-visible {
   transition: opacity 1000ms ease 1700ms, transform 1000ms var(--ease) 1700ms;
 }
 
+/* —— Page exit transition for seamless navigation —— */
+body.is-exiting > *:not(.site-cursor) {
+  opacity: 0 !important;
+  transition: opacity 0.2s ease !important;
+  pointer-events: none !important;
+}
+
 /* —— Footer —— */
 .site-footer {
   display: flex;
@@ -390,6 +397,10 @@ a:focus-visible {
 
 @media (prefers-reduced-motion: reduce) {
   .design-grid { transition: none; opacity: 1; }
+
+  body.is-exiting > *:not(.site-cursor) {
+    transition: none !important;
+  }
 
   .js .hero-name .ch,
   .js .hero-rule,
