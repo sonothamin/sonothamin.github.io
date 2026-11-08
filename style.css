@@ -326,6 +326,32 @@ body.is-exiting > *:not(.site-cursor) {
   pointer-events: none !important;
 }
 
+/* —— Swipe between pages (touch) —— */
+/* Sideways swipes switch pages here, so keep the browser from also treating
+   them as history back/forward. */
+@media (pointer: coarse) {
+  html,
+  body {
+    overscroll-behavior-x: none;
+  }
+}
+
+/* Only translate while a swipe is under way: a translate of 0 would still turn
+   <main> into a containing block for fixed-position children. */
+body.is-swiping > main,
+body.is-settling > main,
+body.is-exiting > main {
+  translate: var(--swipe-x, 0px) 0;
+}
+
+body.is-settling > main {
+  transition: translate 0.4s var(--ease);
+}
+
+body.is-exiting > main:not(.site-cursor) {
+  transition: opacity 0.2s ease, translate 0.2s var(--ease) !important;
+}
+
 /* —— Footer —— */
 .site-footer {
   display: flex;
